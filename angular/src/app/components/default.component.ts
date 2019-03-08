@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {TaskService} from '../services/task.service';
-import {Task} from '../models/task'; 
+import {Task} from '../models/task';
 
 @Component({
 	selector: 'default',
@@ -47,9 +47,9 @@ export class DefaultComponent implements OnInit{
 			this._taskService.getTasks(this.token, page).subscribe(
 				response => {
 					if(response.status == 'success'){
-						this.tasks = response.data;	
+						this.tasks = response.data;
 						this.loading = 'hide';
-					
+
 						console.log('***',this.tasks);
 						//total pages
 						this.pages = [];

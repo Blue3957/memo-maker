@@ -66,7 +66,7 @@ class TaskController extends Controller{
 						));
 
 						if(isset($identity->sub) && $identity->sub == $task->getUsers()->getId()){
-							
+
 							$task->setTitle($title);
 							$task->setDescription($description);
 							$task->setStatus($status);
@@ -90,7 +90,7 @@ class TaskController extends Controller{
 						}
 					}
 
-					
+
 
 				}else{
 					$data = array(
@@ -108,7 +108,7 @@ class TaskController extends Controller{
 				);
 			}
 
-			
+
 		}else{
 			$data = array(
 				"status" 	=> "error",
@@ -129,7 +129,7 @@ class TaskController extends Controller{
 
 		if($authCheck){
 			$identity = $jwt_auth->checkToken($token, true);
-			
+
 			$em = $this->getDoctrine()->getManager();
 
 			$dql = "SELECT t FROM BackendBundle:Task t WHERE t.users = {$identity->sub} ORDER BY t.id DESC";
@@ -137,7 +137,7 @@ class TaskController extends Controller{
 
 			$page = $request->query->getInt('page',1);
 			$paginator = $this->get('knp_paginator');
-			$items_per_page = 2;
+			$items_per_page = 4;
 
 			$pagination = $paginator->paginate($query, $page, $items_per_page);
 			$total_items_count = $pagination->getTotalItemCount();
@@ -192,7 +192,7 @@ class TaskController extends Controller{
 				);
 			}
 
-			
+
 		}else{
 			$data = array(
 				'status'=>'error',
@@ -255,7 +255,7 @@ class TaskController extends Controller{
 			//set order
 			$dql .=" ORDER BY t.id $order";
 			//die();
-			
+
 
 			$query = $em->createQuery($dql);
 
@@ -305,7 +305,7 @@ class TaskController extends Controller{
 			));
 
 			if($task && is_object($task) && $identity->sub == $task->getUsers()->getId()) {
-				
+
 				$em->remove($task);//delete the table register
 				$em->flush();
 
