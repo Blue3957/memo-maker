@@ -96,13 +96,3 @@ class DefaultController extends Controller
 
         }
     }
-
-    public function testAction(){
-
-        $em = $this->getDoctrine()->getManager();
-            $userRepo = $em->getRepository('BackendBundle:User');
-            $users = $userRepo->findAll();
-
-        return new Response($users[0]->getName());
-    }
-}
